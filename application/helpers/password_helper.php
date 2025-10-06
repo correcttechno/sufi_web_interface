@@ -1,7 +1,7 @@
 <?php
 
 function generate_password($string){
-    return (($string));
+    return md5(($string));
 }
 
 function generateRandomPassword($length = 10) {

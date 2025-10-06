@@ -19,12 +19,7 @@
 
 <div class="flex-align gap-16">
     <div class="flex-align gap-8">
-        <!--Active year-->
-        <?php if($this->user_model->activeYear):?>
-        <label class="dropdown-btn text-white text-13 px-20 h-40 bg-success-600 transition-2 rounded-4 text-xl flex-center">
-            Tədris ili:<?=$this->user_model->activeYear['title'];?> <?=($this->user_model->activeYear['part']=='first'?'Birinci yarım il':'İkinci yarım il');?>
-        </label>
-        <?php endif;?>
+      
 
         <!-- Notification Start -->
         <div class="dropdown">

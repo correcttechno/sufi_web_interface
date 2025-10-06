@@ -4,9 +4,8 @@ class User_model extends CI_Model{
 
     public $userdata=false;
     public $notifications=[];
-    public $activeYear=[];
 
-    private $table_name="teachers";
+    private $table_name="users";
 
     function __construct(){
         parent::__construct();
@@ -14,15 +13,8 @@ class User_model extends CI_Model{
         $this->load->library('session');
         $this->userdata=$this->get_userdata();
         $this->notifications=$this->get_notifications();
-        $this->activeYear=$this->get_activeYear();
     }
 
-
-    private function get_activeYear(){
-        $result=$this->database_model->read_row('years',array('active'=>'true'));
-        return count($result)>0?$result:false;
-    }
-    
 
     private function check_user($username,$password){
         $password=generate_password($password);
