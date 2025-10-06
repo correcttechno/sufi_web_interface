@@ -28,15 +28,16 @@ class Actions extends CI_Controller{
 
         $command=$this->actions_model->check_command($_POST);
 
-        if(!empty($title) and !empty($rep) and !empty($command)){
+        if(!empty($title) and !empty($command)){
             $ar =array(
                 'title'     =>$title,
-                'rep'       =>$rep,
+                'rep'       =>(empty($rep)==true?1:$rep),
                 'command'   =>$command,
             );
             
             $this->actions_model->add($ar,$id);
             $response['status']=true;
+            send_tcp_data('reset');
             send_tcp_data($command);
         }
         else{
@@ -72,6 +73,14 @@ class Actions extends CI_Controller{
             if(!empty($command)){
                 send_tcp_data($command);
             }
+        }
+    }
+
+    public function play_device(){
+        $command=$this->input->post('command',true);
+        if(!empty($command)){
+            send_tcp_data($command);
+
         }
     }
    

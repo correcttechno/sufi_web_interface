@@ -289,8 +289,8 @@
     }
 
 
-    if(item=="status"){
-      if(value=="manager")
+    if (item == "status") {
+      if (value == "manager")
         $('#select_department').removeClass('d-none');
       else
         $('#select_department').addClass('d-none');
@@ -372,7 +372,7 @@
     });
   }
 
- 
+
 
 
 
@@ -413,18 +413,37 @@
   });
   /************** initialize the calendar *********************
   -----------------------------------------------------------------*/
- 
-  $('.formcontrol-sm').keyup(function(){
-    var data={
-      'key':$(this).attr('name'),
-      'value':$(this).val(),
+  function send_command_robot(key, value) {
+    var data = {
+      'key': key,
+      'value': value,
     };
-    $.post(base_url+'/test_device',data,function(){
+    $.post(base_url + '/test_device', data, function () {
+
+    })
+  }
+  $('.formcontrol-sm').keyup(function () {
+    if($(this).val().length>1){
+      send_command_robot($(this).attr('name'), $(this).val());
+    }
+  })
+
+  $('.formcontrol-sm').change(function () {
+    if($(this).val().length>1){
+      send_command_robot($(this).attr('name'), $(this).val());
+    }
+  })
+
+  $('.reset-robot').click(function () {
+    send_command_robot('reset', 'reset');
+  })
+
+  $(document).on('click','button[data-play-id]',function(){
+    var command=$(this).attr('data-value');
+     $.post(base_url + '/play_device', {'command':command}, function () {
 
     })
   })
-
-
 
 
 })(jQuery);

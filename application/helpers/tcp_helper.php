@@ -31,7 +31,7 @@ function send_tcp_data($command){
     curl_close($ch);
 
     // Cevabı ekrana yazdır
-    echo $response;
+    return $response;
 
 }
 ?>

@@ -9976,3 +9976,9 @@ button:focus {
     position: relative;
     z-index:1;
 }
+
+.modal .reset-robot{
+    position: absolute;
+    top:10;
+    left:10px;
+}

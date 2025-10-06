@@ -12,11 +12,17 @@
         <!-- Breadcrumb Right Start -->
         <?php if($this->user_model->userdata['status']!='vizitor'):?>
         <div class="flex-align gap-8 flex-wrap">
+
+            <button type="button" class="reset-robot btn btn-warning text-sm btn-sm px-24 rounded-pill" >
+                <i class="ph ph-clock me-4"></i>
+            </button>
+
             <button type="button" class="btn btn-main text-sm btn-sm px-24 rounded-pill" data-bs-toggle="modal"
                 data-bs-target="#addModal">
                 <i class="ph ph-plus me-4"></i>
                 Əlavə et
             </button>
+            
         </div>
         <?php endif;?>
         <!-- Breadcrumb Right End -->
@@ -74,10 +80,10 @@
                                 class="w-40 h-40 bg-danger-50 rounded-circle hover-bg-danger-100 transition-2">
                                 <i class="ph ph-trash text-danger-700"></i>
                             </button>
-                           <!--  <button data-edit-id="<?=$r['id'];?>"
+                            <button data-play-id="<?=$r['id'];?>" data-value="<?=$r['command'];?>"
                                 class=" w-40 h-40 bg-main-50 rounded-circle hover-bg-main-100 transition-2">
-                                <i class="ph ph-pencil-simple text-main-700"></i>
-                            </button> -->
+                                <i class="ph ph-play text-main-700"></i>
+                            </button>
                         <?php endif;?>
                         </td>
                     </tr>
@@ -132,14 +138,24 @@
                         <div class="col-12 robot-control">
                             <img src="<?=get_img('sufibot.png');?>"/>
 
-                            <input class="formcontrol-sm" name="m12" style="top:152px;left:68px;"/>
-                            <input class="formcontrol-sm" name="m11" style="top:226px;left:54px;"/>
-                            <input class="formcontrol-sm" name="m13" style="top:318px;left:44px;"/>
-                            <input class="formcontrol-sm" name="m8" style="top:318px;left:373px;"/>
-                            <input class="formcontrol-sm" name="m4" style="top:226px;left:369px;"/>
-                            <input class="formcontrol-sm" name="m6" style="top:152px;left:350px;"/>
-                            <input class="formcontrol-sm" name="m9" style="top:97px;left:308px;"/>
-                            <input class="formcontrol-sm" name="m10" style="top:40px;left:306px;"/>
+                            <input class="formcontrol-sm" type="number" step="1" name="m12" style="top:152px;left:68px;"/>
+                            <input class="formcontrol-sm" type="number" step="1" name="m11" style="top:226px;left:54px;"/>
+                            <input class="formcontrol-sm" type="number" step="1" name="m13" style="top:318px;left:44px;"/>
+                            <input class="formcontrol-sm" type="number" step="1" name="m8" style="top:318px;left:373px;"/>
+                            <input class="formcontrol-sm" type="number" step="1" name="m4" style="top:226px;left:369px;"/>
+                            <input class="formcontrol-sm" type="number" step="1" name="m6" style="top:152px;left:350px;"/>
+                            <input class="formcontrol-sm" type="number" step="1" name="m9" style="top:97px;left:308px;"/>
+                            <input class="formcontrol-sm" type="number" step="1" name="m10" style="top:40px;left:306px;"/>
+
+                            <input class="formcontrol-sm" type="number" step="1" name="local" style="top:695px;left:39px;"/>
+                            <select class="formcontrol-sm" type="text" name="motor" style="top:729px;left:359px;">
+                                <option value="">----</option>
+                                <option value="forward">İrəli</option>
+                                <option value="backward">Geri</option>
+                                <option value="stop">Dayan</option>
+                            </select>
+
+                            <button class="reset-robot  btn bg-warning-600 hover-bg-warning-800 border-warning-600 hover-border-warning-800 text-md px-24 py-12 radius-8"><i class="ph ph-clock-clockwise"></i></button>
                         </div>
 
                         <div class="d-flex align-items-center justify-content-center gap-8 mt-24">

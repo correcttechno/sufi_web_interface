@@ -32,36 +32,48 @@ class Actions_model extends CI_Model{
         extract($ar);
         $command="";
 
-        if(!empty($m12) and ($m12>=50 and $m12<=145)){
+        if(isset($m12) and !empty($m12) and ($m12>=50 and $m12<=145)){
             $command.="12,$m12 ";
         }
 
-        if(!empty($m11) and ($m11>=105 and $m11<=133)){
+        if(isset($m11) and !empty($m11) and ($m11>=105 and $m11<=133)){
             $command.="11,$m11 ";
         }
 
-        if(!empty($m13) and ($m13>=40 and $m13<=92)){
+        if(isset($m13) and !empty($m13) and ($m13>=40 and $m13<=92)){
             $command.="13,$m13 ";
         }
 
-        if(!empty($m8) and ($m8>=100 and $m8<=150)){
+        if(isset($m8) and !empty($m8) and ($m8>=100 and $m8<=150)){
             $command.="8,$m8 ";
         }
 
-        if(!empty($m4) and ($m4>=72 and $m4<=122)){
+        if(isset($m4) and !empty($m4) and ($m4>=72 and $m4<=122)){
             $command.="4,$m4 ";
         }
 
-        if(!empty($m6) and ($m6>=68 and $m6<=126)){
+        if(isset($m6) and !empty($m6) and ($m6>=68 and $m6<=126)){
             $command.="6,$m6 ";
         }
 
-        if(!empty($m9) and ($m9>=50 and $m9<=120)){
+        if(isset($m9) and !empty($m9) and ($m9>=50 and $m9<=120)){
             $command.="9,$m9 ";
         }
 
-        if(!empty($m10) and ($m10>=130 and $m10<=160)){
+        if(isset($m10) and !empty($m10) and ($m10>=130 and $m10<=160)){
             $command.="10,$m10 ";
+        }
+
+        if(isset($local) and !empty($local) and ($local>=0 and $local<=180)){
+            $command.="local:$local ";
+        }
+        
+        if(isset($motor) and !empty($motor)){
+            $command.=$motor;
+        }
+
+        if(isset($reset)){
+            $command='reset';
         }
 
         $command=rtrim($command);
