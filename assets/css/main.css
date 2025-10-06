@@ -9957,3 +9957,22 @@ button:focus {
         z-index: 10000 !important;
     }
 }
+
+.formcontrol-sm{
+    width:80px;
+    border:1px solid rgb(196, 196, 196);
+    background-color: #fff;
+    border-radius: 2px;
+    display: inline-block;
+    position: absolute;
+    top:0px;
+    left:0px;
+    font-size: 12px;
+    padding: 5px;
+}
+
+
+.robot-control{
+    position: relative;
+    z-index:1;
+}

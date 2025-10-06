@@ -30,6 +30,13 @@
                 </li>
 
                 <li class="sidebar-menu__item">
+                    <a href="<?=base_url("actions");?>" class="sidebar-menu__link">
+                        <span class="icon"><i class="ph ph-list"></i></span>
+                        <span class="text">Hərəkətlər</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-menu__item">
                     <a href="<?=base_url("languages");?>" class="sidebar-menu__link">
                         <span class="icon">
                             <i class="ph ph-columns-plus-left"></i>
