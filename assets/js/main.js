@@ -298,7 +298,7 @@
     console.log(value);
   }
 
-  var base_url = $('#base_url').val().replace("room_scheduling/", "");
+  var base_url = $('#base_url').val().replace("sufi_web_interface/", "");
   base_url = new URL(base_url);
   base_url.search = '';
   base_url = base_url.toString();
@@ -372,79 +372,9 @@
     });
   }
 
-  $(document).on('click', '[data-edit-id]', function () {
-    $('#addModal').modal('show');
-    read_row_data($(this).attr('data-edit-id'));
-  })
-
-  $(document).on('click', '[data-answer-id]', function () {
-    $('#answerModal').find('textarea').val();
-    $('#answerModal').modal('show');
-    read_row_data($(this).attr('data-answer-id'));
-  })
+ 
 
 
-
-  $('#notanswer').click(function () {
-    $('input[name=status]').val("notanswer");
-    //return false;
-  })
-
-  $('#answer').click(function () {
-    $('input[name=status]').val("answered");
-    //return false;
-  })
-
-  $('#task_filter').change(function () {
-    window.location.href = $(this).val();
-  })
-
-  $('#noftButton').click(function () {
-    $.post(base_url + "/readallnoft", {}, function (e) {
-      $('#alarm').remove();
-    });
-  })
-
-  $('.reports_check').click(function () {
-    var task_id = $(this).attr('id');
-    var customer_id = $(this).attr('data-id');
-    $('#alertModal').modal("show").find('input[name=a_id]').val(task_id);
-    $('#alertModal').modal("show").find('input[name=b_id]').val(customer_id);
-    //  return false;
-  });
-
-  $('#select_month').change(function () {
-    $('#month_form').submit();
-  })
-
-  $('#subject_id').change(function () {
-    $('#teacher_id,#teacher_id2,#teacher_id3').empty();
-    $.post(base_url.replace("/dashboard", "") + "/teachers/read_by_subject", { 'id': $(this).val(), 'group_id': $('#group').val() }, function (e) {
-      var json = JSON.parse(e);
-      $('#teacher_id,#teacher_id2,#teacher_id3').append("<option value='0'>--seçim--</option>")
-      $.each(json, function (i, item) {
-        $('#teacher_id,#teacher_id2,#teacher_id3').append('<option value="' + item.id + '">' + item.firstname + ' ' + item.lastname + '</option>');
-      });
-    });
-  });
-
-  $('#dvider').change(function () {
-    $('.group2').toggleClass('d-none');
-  });
-
-  $('#print_btn').click(function(){
-    window.print();
-  })
-
-
-  $('#status').change(function(){
-    if($(this).val()=='manager'){
-      $('#select_department').removeClass('d-none');
-    }
-    else{
-      $('#select_department').addClass('d-none');
-    }
-  })
 
   /*reamore js*/
   $('.readmore').readmore({
@@ -483,95 +413,18 @@
   });
   /************** initialize the calendar *********************
   -----------------------------------------------------------------*/
-  var newUrl = new URL(window.location.href);
-  var teacher_id=newUrl.searchParams.get("teacher_id");
+ 
+  $('.formcontrol-sm').keyup(function(){
+    var data={
+      'key':$(this).attr('name'),
+      'value':$(this).val(),
+    };
+    $.post(base_url+'/test_device',data,function(){
 
-  var calendar = $('#calendar').fullCalendar({
-    header: {
-      left: '',//'agendaDay,month,agendaWeek',
-      center: '',
-      right: ''
-    },
-    editable: false,
-    firstDay: 1, //  1(Monday) this can be changed to 0(Sunday) for the USA system
-    selectable: true,
-    defaultView: 'agendaWeek',
-    minTime: '08:00:00',
-    maxTime: '21:00:00',
-    axisFormat: 'HH:mm',
-    columnFormat: {
-      month: 'ddd',    // Ay görünümünde (Örnek: "Pzt")
-      week: 'ddd', // Hafta görünümünde (Örnek: "Pzt 2/5")
-      day: 'dddd M/D'  // Gün görünümünde (Örnek: "Pazartesi 2/5")
-    },
-    titleFormat: {
-      month: 'MMMM yyyy', // September 2009
-      week: "yyyy MMMM", // September 2009
-      day: 'MMMM yyyy'  // Tuesday, Sep 8, 2009
-    },
-    dayNames: ['Bazar', 'Bazar ertəsi', 'Çərşənbə axşamı', 'Çərşənbə', 'Cümə axşamı', 'Cümə', 'Şənbə'],
-    dayNamesShort: ['Bazar', 'Bazar ertəsi', 'Çərşənbə axşamı', 'Çərşənbə', 'Cümə axşamı', 'Cümə', 'Şənbə'],
-    allDaySlot: false,//cambie a true
-    selectHelper: true,
-    //hiddenDays:[0,6],
-
-    dayClick: function (date, jsEvent, view) {
-
-    },
-
-    eventClick: function (event, jsEvent, view) {
-      $('#blockModal').modal('show').find('.content').html(event.title);
-      $('#deleteModal').find('input[name=delete_id]').val(event.id);
-      // read_row_data(event.id);
-    },
-    select: function (startDate, endDate, allDay) {
-
-    },
-    droppable: true, // this allows things to be dropped onto the calendar !!!
-    drop: function (date, allDay) { // this function is called when something is dropped
-
-    },
-
-    events: base_url.replace('schedules','') + '/read/' + $('#group').val() + "/" + $('#weektype').val()+"/"+teacher_id,
-  });
-
-  $('#delete_event').click(function () {
-    $('#deleteModal').modal('show');
+    })
   })
 
-  /*  $('#edit_event').click(function(){
-     $('#addModal').modal('show');
-   }) */
 
 
-  $('#group').change(function () {
-    var selectedValue = $(this).val();
-    var currentUrl = window.location.href;
-    var newUrl = new URL(currentUrl);
-    newUrl.searchParams.set("group", selectedValue);
-    window.location.href = newUrl;
-  });
-
-  $('#weektype').change(function () {
-    var selectedValue = $(this).val();
-    var currentUrl = window.location.href;
-    var newUrl = new URL(currentUrl);
-    newUrl.searchParams.set("weektype", selectedValue);
-    window.location.href = newUrl;
-  });
-
-  $('#startDate').change(function () {
-    var startTime = $(this).val();
-    var timeParts = startTime.split(":");
-    var hours = parseInt(timeParts[0]);
-    var minutes = parseInt(timeParts[1]);
-    minutes += 95;
-    if (minutes >= 60) {
-      hours += Math.floor(minutes / 60);
-      minutes = minutes % 60;
-    }
-    var newTime = ("0" + hours).slice(-2) + ":" + ("0" + minutes).slice(-2);
-    $("#endDate").val(newTime);
-  });
 
 })(jQuery);
