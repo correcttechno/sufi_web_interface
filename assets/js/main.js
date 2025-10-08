@@ -340,6 +340,11 @@
     $('#deleteModal').modal('show');
   })
 
+  $(document).on('click', '[data-edit-id]', function () {
+    $('#addModal').modal('show');
+    read_row_data($(this).attr('data-edit-id'));
+  })
+
   $('button[type=reset]').click(function () {
     $('.modal').modal('hide');
   })
@@ -443,6 +448,10 @@
      $.post(base_url + '/play_device', {'command':command}, function () {
 
     })
+  })
+
+  $('#ai_generate').click(function(){
+    return false;
   })
 
 
