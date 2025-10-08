@@ -17,7 +17,7 @@ def save_binary_file(file_name, data):
     print(f"File saved to to: {file_name}")
 
 
-def generate():
+def generate(message):
     client = genai.Client(api_key="AIzaSyADykFQEpsNRN5rre-Z8jnTo0u4N66ItgE")
     
 
@@ -26,7 +26,7 @@ def generate():
         types.Content(
             role="user",
             parts=[
-                types.Part.from_text(text="""salam necəsən?"""),
+                types.Part.from_text(text=message),
             ],
         ),
     ]
@@ -57,7 +57,7 @@ def generate():
         ):
             continue
         if chunk.candidates[0].content.parts[0].inline_data and chunk.candidates[0].content.parts[0].inline_data.data:
-            file_name = f"ENTER_FILE_NAME_{file_index}"
+            file_name = f"sound_{file_index}"
             file_index += 1
             inline_data = chunk.candidates[0].content.parts[0].inline_data
             data_buffer = inline_data.data
@@ -66,8 +66,9 @@ def generate():
                 file_extension = ".wav"
                 data_buffer = convert_to_wav(inline_data.data, inline_data.mime_type)
             save_binary_file(f"{file_name}{file_extension}", data_buffer)
+            return file_name
         else:
-            print(chunk.text)
+            return ''
 
 def convert_to_wav(audio_data: bytes, mime_type: str) -> bytes:
     """Generates a WAV file header for the given audio data and parameters.
@@ -144,5 +145,4 @@ def parse_audio_mime_type(mime_type: str) -> dict[str, int | None]:
     return {"bits_per_sample": bits_per_sample, "rate": rate}
 
 
-if __name__ == "__main__":
-    generate()
+

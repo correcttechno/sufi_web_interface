@@ -1,11 +1,12 @@
 from flask import Flask, request
 import serial
 import time
+import text_to_speech
 
 app = Flask(__name__)
 
 # Seri port ve ayarlar
-PORT = "COM11"
+PORT = "COM3"
 BAUDRATE = 115200
 TIMEOUT = 10
 
@@ -33,6 +34,18 @@ def send_to_serial():
             received = ser.read(ser.in_waiting).decode()
         
         return {"sent": data, "received": received}, 200
+    except Exception as e:
+        return f"Hata: {e}", 500
+    
+@app.route('/generate_sound', methods=['GET'])
+def generate_sound():
+    # GET parametresinden veri al
+    data = request.args.get('data')
+    if not data:
+        return "data parametresi eksik!", 400
+    try:
+        res=text_to_speech.generate(data)
+        return {"sent": res}, 200
     except Exception as e:
         return f"Hata: {e}", 500
 
