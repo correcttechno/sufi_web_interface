@@ -43,7 +43,7 @@ class Conversations extends CI_Controller{
             $ar=array(
                 'question'  =>$question,
                 'answer'    =>$answer,
-                'action_id' =>$action_id,
+                'action_id' =>empty($action_id)==true?'':$action_id,
                 'sound'     =>$sound,
             );
 

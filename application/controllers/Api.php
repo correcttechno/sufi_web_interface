@@ -24,6 +24,9 @@ class Api extends CI_Controller{
                 $action=$this->actions_model->read_row($result['action_id']);
                 if(count($action)>0){
                     send_tcp_data($action['command']);
+                    send_tcp_data("12,100 11,105 13,60 9,80 10,150");
+                    send_tcp_data($action['command']);
+                    send_tcp_data("12,100 11,105 13,60 9,80 10,150");
                 }
             }
             else{

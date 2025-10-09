@@ -304,13 +304,13 @@
   base_url = base_url.toString();
   $('form:not([data-stop])').ajaxForm({
     beforeSend: function () {
-      $('form').addClass('loading');
+     /*  $('form').addClass('loading'); */
     },
     uploadProgress: function (h, o, t, faiz) {
 
     },
     complete: function (x) {
-      $('form').removeClass('loading');
+      /* $('form').removeClass('loading'); */
       var result = x.responseText;
       var json = JSON.parse(result);
       $.each(json, function (i, item) {
@@ -428,13 +428,13 @@
     })
   }
   $('.formcontrol-sm').keyup(function () {
-    if ($(this).val().length > 1) {
+    if ($(this).val().length > 0) {
       send_command_robot($(this).attr('name'), $(this).val());
     }
   })
 
   $('.formcontrol-sm').change(function () {
-    if ($(this).val().length > 1) {
+    if ($(this).val().length > 0) {
       send_command_robot($(this).attr('name'), $(this).val());
     }
   })
