@@ -19,6 +19,7 @@ class Conversations extends CI_Controller{
     public function add(){
         $question       =$this->input->post('question',true);
         $answer         =$this->input->post('answer',true);
+        $sound          =$this->input->post('sound',true);
         $action_id      =$this->input->post('action_id',true);
 
 
@@ -43,6 +44,7 @@ class Conversations extends CI_Controller{
                 'question'  =>$question,
                 'answer'    =>$answer,
                 'action_id' =>$action_id,
+                'sound'     =>$sound,
             );
 
             $this->conversations_model->add($ar,$id);
@@ -69,6 +71,7 @@ class Conversations extends CI_Controller{
             }
         }
     }
+
 
     
 

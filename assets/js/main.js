@@ -428,13 +428,13 @@
     })
   }
   $('.formcontrol-sm').keyup(function () {
-    if($(this).val().length>1){
+    if ($(this).val().length > 1) {
       send_command_robot($(this).attr('name'), $(this).val());
     }
   })
 
   $('.formcontrol-sm').change(function () {
-    if($(this).val().length>1){
+    if ($(this).val().length > 1) {
       send_command_robot($(this).attr('name'), $(this).val());
     }
   })
@@ -443,16 +443,63 @@
     send_command_robot('reset', 'reset');
   })
 
-  $(document).on('click','button[data-play-id]',function(){
-    var command=$(this).attr('data-value');
-     $.post(base_url + '/play_device', {'command':command}, function () {
+  $(document).on('click', 'button[data-play-id]', function () {
+    var command = $(this).attr('data-value');
+    $.post(base_url + '/play_device', { 'command': command }, function () {
 
     })
   })
 
-  $('#ai_generate').click(function(){
+
+  async function playWav(url) {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const resp = await fetch(url);
+    const arrayBuffer = await resp.arrayBuffer();
+    const audioBuffer = await ctx.decodeAudioData(arrayBuffer);
+    const src = ctx.createBufferSource();
+    src.buffer = audioBuffer;
+
+    // örnek: gain (ses seviyesi) ekleyelim
+    const gainNode = ctx.createGain();
+    gainNode.gain.value = 0.8;
+
+    src.connect(gainNode).connect(ctx.destination);
+    src.start(0);
+
+    // 🎵 Bitince çalışacak event
+    src.onended = () => {
+      $('.play-sound').find('.ph-fill').addClass('ph-play').removeClass('ph-stop');
+    };
+
+    // src.stop(time) ile durdurabilirsin
+  }
+
+
+  $('#ai_generate').click(function () {
+    $('.modal-body').addClass('loading');
+    $.ajax({
+      url: 'http://localhost:321/generate_sound',
+      data: { 'data': $('#answer').val() },
+      dataType: 'Json',
+      method: 'POST',
+      success: function (e) {
+        $('.modal-body').removeClass('loading');
+        $('input[name=sound]').val(e.filename);
+        if (e.status == true) {
+          playWav('uploads/sounds/' + e.filename + '.wav').catch(console.error);
+        }
+      },
+    },);
+
+
     return false;
   })
+
+  $('.play-sound').click(function () {
+    $(this).find('.ph-fill').removeClass('ph-play').addClass('ph-stop');
+    playWav('uploads/sounds/' + $(this).data('src') + '.wav').catch(console.error);
+  })
+
 
 
 })(jQuery);

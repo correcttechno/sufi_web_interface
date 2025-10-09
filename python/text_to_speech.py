@@ -4,17 +4,25 @@
 import base64
 import mimetypes
 import os
+import random
 import re
 import struct
 from google import genai
 from google.genai import types
-
+import os
 
 def save_binary_file(file_name, data):
-    f = open(file_name, "wb")
-    f.write(data)
-    f.close()
-    print(f"File saved to to: {file_name}")
+    # kod dosyasının bulunduğu klasör
+    base_dir = os.path.dirname(__file__)
+    
+    # bir üst klasördeki “output” klasörü
+    save_dir = os.path.join(base_dir, "..", "uploads/sounds")
+    os.makedirs(save_dir, exist_ok=True)
+
+    file_path = os.path.join(save_dir, file_name)
+    with open(file_path, "wb") as f:
+        f.write(data)
+    print(f"File saved to: {os.path.abspath(file_path)}")
 
 
 def generate(message):
@@ -44,7 +52,7 @@ def generate(message):
         ),
     )
 
-    file_index = 0
+    file_index = random.randint(1111,9999)
     for chunk in client.models.generate_content_stream(
         model=model,
         contents=contents,

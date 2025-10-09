@@ -64,9 +64,9 @@
                         </td>
 
                         <td>
-                            <span class="mb-0 text-gray-300">
-                                <?=$r['sound'];?>
-                            </span>
+                            <?php if(!empty($r['sound'])):?>
+                            <button data-src="<?=$r['sound'];?>" class="play-sound mt-30 flex-shrink-0 w-40 h-40 flex-center bg-main-two-600 text-white text-xl"><i class="ph-fill ph-play"></i></button>
+                            <?php endif;?>
                         </td>
 
                         <?php $action=$this->actions_model->read_row($r['action_id']);?>
@@ -136,11 +136,12 @@
                         <div class="col-10">
                             <label class="form-label fw-semibold text-primary-light text-sm mb-8">Cavab:<span class="text-danger">*</span>
                             </label>
-                            <textarea type="text" name="answer" class="form-control radius-8" placeholder="Cavab"></textarea>
+                            <textarea type="text" id="answer" name="answer" class="form-control radius-8" placeholder="Cavab"></textarea>
                             <span data-error="answer" class="text-xs text-danger"></span>
                         </div>
 
                         <div class="col-2">
+                            <input type="hidden" name="sound" value=""/>
                             <button id="ai_generate" class="mt-30 flex-shrink-0 w-48 h-48 flex-center rounded-circle bg-main-two-600 text-white text-2xl"><i class="ph-fill ph-atom"></i></button>
                         </div>
 

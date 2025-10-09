@@ -9982,3 +9982,22 @@ button:focus {
     top:10;
     left:10px;
 }
+
+.loading{
+    position: relative;
+}
+
+.loading::after {
+    background-image: url(../images/loading.gif);
+    background-color: rgba(255, 255, 255, 0.473);
+    background-repeat: no-repeat;
+    background-size: 70px 70px;
+    background-position: center center;
+    height: 200px;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}

@@ -1,9 +1,11 @@
 from flask import Flask, request
+from flask_cors import CORS
 import serial
 import time
 import text_to_speech
 
 app = Flask(__name__)
+CORS(app)
 
 # Seri port ve ayarlar
 PORT = "COM3"
@@ -37,17 +39,17 @@ def send_to_serial():
     except Exception as e:
         return f"Hata: {e}", 500
     
-@app.route('/generate_sound', methods=['GET'])
+@app.route('/generate_sound', methods=['POST'])
 def generate_sound():
-    # GET parametresinden veri al
-    data = request.args.get('data')
+    # POST parametresinden veri al
+    data = request.form.get('data')
     if not data:
-        return "data parametresi eksik!", 400
+        return {"filename": '',"status":False}, 400
     try:
         res=text_to_speech.generate(data)
-        return {"sent": res}, 200
+        return {"filename": res,"status":True}, 200
     except Exception as e:
-        return f"Hata: {e}", 500
+        return {"filename": '',"status":False}, 200
 
 if __name__ == '__main__':
     # Flask serverini 321 portunda başlat
