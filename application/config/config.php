@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 //$config['base_url'] = 'http://localhost/room_scheduling/';
 
-$config['base_url'] = 'http://localhost/sufi_web_interface/';
+$config['base_url'] = 'http://10.88.96.213/sufi_web_interface/';
 
 
 /*

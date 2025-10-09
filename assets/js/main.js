@@ -478,7 +478,7 @@
   $('#ai_generate').click(function () {
     $('.modal-body').addClass('loading');
     $.ajax({
-      url: 'http://localhost:321/generate_sound',
+      url: 'http://10.88.96.213:321/generate_sound',
       data: { 'data': $('#answer').val() },
       dataType: 'Json',
       method: 'POST',
