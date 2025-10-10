@@ -6,6 +6,8 @@ import keyboard
 import pygame
 import serial
 import os
+import requests
+import os
 
 
 
@@ -23,10 +25,12 @@ pygame.mixer.init()
 # =================== Funksiyalar ===================
 def play_wav_blocking(path):
     """pygame ilə səsləri çalır və ESC basılarsa dayandırır"""
+    print(path)
     try:
         is_playing_audio.set()
         print(f"[Assist] Səsləndirilir: {path}")
-        pygame.mixer.music.load(path)
+ 
+        pygame.mixer.music.load('C:/xampp/htdocs'+path)
         pygame.mixer.music.play()
 
         while pygame.mixer.music.get_busy():
@@ -45,6 +49,18 @@ def play_wav_blocking(path):
 def handle_command(text):
     txt = text.lower()
     print(f"[Tanındı] {txt}")
+    url = "http://localhost/api/run"
+    params = {"text": txt}
+
+    response = requests.get(url, params=params)
+    if response.status_code == 200:
+        data = response.json()
+        for comment in data:
+            if(data['filepath']!=""):
+                play_wav_blocking(data['filepath'])
+            return False
+    else:
+        print("Hata:", response.text)
 
     return False
 
@@ -86,4 +102,5 @@ def esc_listener():
 # =================== Main ===================
 if __name__ == "__main__":
     threading.Thread(target=esc_listener, daemon=True).start()
+    #play_wav_blocking("uploads/sounds/sound_4427.wav")
     listen_loop()

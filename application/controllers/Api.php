@@ -19,10 +19,10 @@ class Api extends CI_Controller{
         if(!empty($text)){
             $result=$this->api_model->search_conversation($text);
             if(count($result)>0){
-                $response['filepath']=base_url('uploads/sounds/'.$result['sound'].'.wav');
+                $response['filepath']=("/uploads/sounds/".$result['sound'].'.wav');
                 $response['status']=true;
                 $action=$this->actions_model->read_row($result['action_id']);
-                if(count($action)>0){
+                if($action){
                     send_tcp_data($action['command']);
                 }
             }
