@@ -16,15 +16,7 @@ recognizer = sr.Recognizer()
 stop_event = threading.Event()
 is_playing_audio = threading.Event()
 
-# =================== Arduino serial port ===================
-SERIAL_PORT = "COM7"  # öz cihazınıza görə dəyişin
-BAUD_RATE = 115200
-try:
-    ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=1)
-    print(f"[Assist] Arduino ilə bağlantı uğurlu: {SERIAL_PORT}")
-except Exception as e:
-    print(f"[Assist] Arduino bağlantısı alınmadı: {e}")
-    ser = None
+
 
 pygame.mixer.init()
 
