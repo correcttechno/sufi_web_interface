@@ -1,5 +1,6 @@
 <div class="dashboard-footer d-print-none">
         <input type="hidden" id="base_url" value="<?=base_url($_SERVER['REQUEST_URI']);?>"/>
+        <input type="hidden" id="base_ip" value="<?=($_SERVER['HTTP_HOST']);?>"/>
         <div class="flex-between flex-wrap gap-16">
             <p class="text-gray-300 text-13 fw-normal"> &copy; <?=date('Y');?>, All Right Reserverd</p>
             <div class="flex-align flex-wrap gap-16">

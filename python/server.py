@@ -9,7 +9,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Seri port ve ayarlar
-PORT = "COM8"
+PORT = "COM3"
 BAUDRATE = 115200
 TIMEOUT = 10
 

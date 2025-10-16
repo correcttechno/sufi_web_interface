@@ -25,7 +25,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 //$config['base_url'] = 'http://localhost/room_scheduling/';
 
-$config['base_url'] = 'http://10.88.96.157/';
+//$config['base_url'] = 'http://10.88.96.157/';
+if (isset($_SERVER['HTTP_HOST']) && ($_SERVER['HTTP_HOST'] === 'localhost' || $_SERVER['HTTP_HOST'] === '127.0.0.1')) {
+    $config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http")
+        . "://localhost/sufi_web_interface/";
+} else {
+    $config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http")
+        . "://"
+        . $_SERVER['SERVER_ADDR']
+        . "/";
+}
 
 
 /*
