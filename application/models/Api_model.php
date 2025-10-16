@@ -9,6 +9,13 @@ class Api_model extends CI_Model{
         return $result!=null?$result:array();
     }
 
+
+    public function add_conversation($text){
+        $ar=array('word'=>$text);
+        $this->database_model->insert("undefineds",$ar);
+        return true;
+    }
+
 }
 
 ?>

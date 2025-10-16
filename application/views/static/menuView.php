@@ -23,9 +23,9 @@
                 </li>
 
                 <li class="sidebar-menu__item">
-                    <a href="<?=base_url("undefinedwords");?>" class="sidebar-menu__link">
+                    <a href="<?=base_url("undefineds");?>" class="sidebar-menu__link">
                         <span class="icon"><i class="ph ph-list"></i></span>
-                        <span class="text">Bilinməyən Sözlər</span>
+                        <span class="text">Bilinməyən Cümlələr</span>
                     </a>
                 </li>
 

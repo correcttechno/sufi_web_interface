@@ -27,6 +27,7 @@ class Api extends CI_Controller{
                 }
             }
             else{
+                $this->api_model->add_conversation($text);
                 $response['msg']="Command not found";
             }
         }
