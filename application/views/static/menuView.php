@@ -36,14 +36,14 @@
                     </a>
                 </li>
 
-                <li class="sidebar-menu__item">
+                <!-- <li class="sidebar-menu__item">
                     <a href="<?=base_url("languages");?>" class="sidebar-menu__link">
                         <span class="icon">
                             <i class="ph ph-columns-plus-left"></i>
                         </span>
                         <span class="text">Dillər</span>
                     </a>
-                </li>
+                </li> -->
 
 
 
